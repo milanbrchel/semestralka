@@ -28,7 +28,10 @@ jobs:
       - run: echo $SECRET_KEY test.pem
       - run: chmod 400 test.pem
       - run: echo $HESLO_ANSIBLE > .heslo_ansible.txt
-
+      - run:
+         command: ansible-playbook ansible/ec2_deploy.yml --user ubuntu --key-file test.pem --vault-pass-file .heslo_ansible.txt
+         environment:
+            ANSIBLE_HOST_KEY_CHECKING: False
 workflows:
   version: 2.1
   build:
