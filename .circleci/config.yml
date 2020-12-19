@@ -31,8 +31,7 @@ jobs:
       - run:
          command: ansible-playbook ansible/ec2_deploy.yml --user ubuntu --key-file test.pem --vault-pass-file .heslo_ansible.txt
          environment:
-            ANSIBLE_HOST_KEY_CHECKING: False 
-
+            ANSIBLE_HOST_KEY_CHECKING: False
 workflows:
   version: 2.1
   build:
