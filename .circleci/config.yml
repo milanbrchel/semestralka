@@ -28,6 +28,7 @@ jobs:
       - run: echo $SECRET_KEY test.pem
       - run: chmod 400 test.pem
       - run: echo $HESLO_ANSIBLE > .heslo_ansible.txt
+
 workflows:
   version: 2.1
   build:
