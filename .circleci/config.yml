@@ -25,6 +25,9 @@ jobs:
       - add_ssh_keys:
          fingerprints:
           - "70:bd:a9:a9:5c:45:82:c9:00:87:14:a1:a0:53:06:1d"
+      - run: echo $SECRET_KEY test.pem
+      - run: chmod 400 test.pem
+      - run: echo $HESLO_ANSIBLE > .heslo_ansible.txt
 workflows:
   version: 2.1
   build:
