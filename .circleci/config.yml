@@ -27,9 +27,9 @@ jobs:
           - "70:bd:a9:a9:5c:45:82:c9:00:87:14:a1:a0:53:06:1d"
       - run: echo $SECRET_KEY | sed 's/<CRLF>/\n/g' > test.pem
       - run: chmod 400 test.pem
-      - run: echo $ESLO_ANSIBLE > .heslo_ansible.txt
+      - run: echo $HESLO_ANSIBLE > .heslo_ansible.txt
       - run:
-         command: ansible-playbook ansible/ec2_deploy.yml --user ubuntu --key-file test.pem --vault-pass-file .heslo_ansible.txt
+         command: ansible-playbook ansible/ec2_deploy.yml --user ubuntu --key-file test.pem --vault-pass-file heslo_ansible.txt
          environment:
             ANSIBLE_HOST_KEY_CHECKING: False
 workflows:
