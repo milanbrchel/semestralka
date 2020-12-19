@@ -1,0 +1,10 @@
+Session token pouze 3 hod
+
+Docker 
+
+pip3 install ansible
+pip3 install boto
+pip3 install boto3
+
+ansible-vault create aws.yml (zadat heslo, stejné, access_key:, secret_key:, session_token: a potom ESC :wq) (= WINDOWS lekce, předposlední video)
+vi aws.yml - tohle nakopírovat do vaultu
