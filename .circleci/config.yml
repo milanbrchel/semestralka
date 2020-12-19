@@ -1,11 +1,9 @@
-vse: &vse
-  docker:
-    - image: circleci/node:8.11.3
-
 version: 2.1
+
 jobs:
   build:
-    <<: *vse
+    docker:
+      - image: circleci/node:8.11.3
     steps:
       - checkout
       - run: npm install
@@ -16,13 +14,14 @@ jobs:
          paths:
             - .
   deploy:
-     <<: *vse
-     steps:
-        - attach_workspace:
-           at: .
-        - run:
-           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
-
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - attach_workspace:
+          at: .
+      - run: pip3 install ansible
+      - run: pip3 install boto
+      - run: pip3 install boto3
 workflows:
   version: 2.1
   build:
