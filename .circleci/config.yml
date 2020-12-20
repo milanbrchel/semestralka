@@ -19,18 +19,29 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: pip3 install ansible
-      - run: pip3 install boto
-      - run: pip3 install boto3
+      - run: 
+         name: "Install ansible"
+	 command: pip3 install ansible
+      - run:
+         name: "Install boto"
+	 command: pip3 install boto
+      - run:
+         name: "Install boto3"
+	 command: pip3 install boto3
       - add_ssh_keys:
          fingerprints:
           - "70:bd:a9:a9:5c:45:82:c9:00:87:14:a1:a0:53:06:1d"
-      - run: echo $SECRET_KEY > test.pem
-      - run: chmod 400 test.pem
-      - run: echo $HESLO_ANSIBLE > heslo_ansible.txt
       - run:
-         command: ansible-playbook -vvv ansible/crunchify_ec2_terminate.yml
+         name: "Add environment variable into test.pem file"
+	 command: echo $SECRET_KEY > test.pem
       - run:
+         name: "Protect test.pem file"
+	 command: chmod 400 test.pem
+      - run:
+         name: "Add environment variable into heslo_ansible.txt file"
+	 command: echo $HESLO_ANSIBLE > heslo_ansible.txt
+      - run:
+         name: "Run"
          command: ansible-playbook ansible/ec2_deploy.yml --user ubuntu --key-file test.pem --vault-pass-file heslo_ansible.txt
          environment:
             ANSIBLE_HOST_KEY_CHECKING: False
